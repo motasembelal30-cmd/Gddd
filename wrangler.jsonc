@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "gddd",
+  "name": "add",
   "compatibility_date": "2026-06-03",
   "observability": {
     "enabled": true
