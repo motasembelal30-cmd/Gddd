@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دار النظارات - Dar Al-Nadarat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #F47920;
+            --orange-dark: #D45D10;
+            --orange-light: #FFF0E5;
+            --white: #FFFFFF;
+            --black: #1A1A1A;
+            --gray: #6B7280;
+            --gray-light: #F3F4F6;
+            --gray-border: #E5E7EB;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background: #FAFAFA;
+            color: var(--black);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========== LOADING SCREEN ========== */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loading-logo {
+            text-align: center;
+            animation: pulseLogo 1.5s ease-in-out infinite;
+        }
+        .loading-logo .logo-icon {
+            font-size: 60px;
+            display: block;
+        }
+        .loading-logo .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--orange);
+            letter-spacing: -0.5px;
+        }
+        @keyframes pulseLogo {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .header-logo .logo-img {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+            box-shadow: 0 4px 12px rgba(244, 121, 32, 0.3);
+        }
+        .header-logo .logo-name {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+        .header-logo .logo-name span {
+            color: var(--orange);
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--orange);
+            color: white;
+            box-shadow: 0 4px 14px rgba(244, 121, 32, 0.35);
+        }
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(244, 121, 32, 0.45);
+        }
+        .btn-outline {
+            background: var(--white);
+            color: var(--orange);
+            border: 2px solid var(--orange);
+        }
+        .btn-outline:hover {
+            background: var(--orange-light);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--gray);
+            border: 1px solid var(--gray-border);
+        }
+        .btn-ghost:hover {
+            background: var(--gray-light);
+        }
+        .btn-sm {
+            padding: 7px 14px;
+            font-size: 12px;
+            border-radius: 40px;
+        }
+        .btn-lg {
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 50px;
+        }
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gray-light);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .user-badge img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--orange);
+        }
+        .admin-indicator {
+            background: var(--orange);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== MAIN CONTAINER ========== */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            min-height: 80vh;
+        }
+
+        /* ========== SCREENS ========== */
+        .screen {
+            display: none;
+            animation: fadeSlideIn 0.45s ease;
+        }
+        .screen.active {
+            display: block;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== LOGIN SCREEN ========== */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-align: center;
+            gap: 24px;
+        }
+        .login-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 40px 32px;
+            box-shadow: var(--shadow-xl);
+            max-width: 440px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .login-card .welcome-icon {
+            font-size: 56px;
+        }
+        .login-card h2 {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--black);
+        }
+        .login-card p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gray);
+            font-size: 13px;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-border);
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--white);
+            border: 2px solid var(--gray-border);
+            padding: 14px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .google-btn:hover {
+            border-color: #4285F4;
+            box-shadow: 0 4px 16px rgba(66, 133, 244, 0.15);
+        }
+        .google-btn img {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* ========== FACE CAPTURE ========== */
+        .face-capture-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .capture-steps {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .capture-step {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            transition: var(--transition);
+            border: 3px solid transparent;
+        }
+        .capture-step.done {
+            background: #D1FAE5;
+            border-color: #10B981;
+            color: #059669;
+        }
+        .capture-step.current {
+            background: var(--orange-light);
+            border-color: var(--orange);
+            color: var(--orange-dark);
+            animation: pulseStep 1.5s infinite;
+        }
+        @keyframes pulseStep {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 121, 32, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 16px rgba(244, 121, 32, 0);
+            }
+        }
+        .camera-view {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4/5;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #000;
+            margin: 16px auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+        .camera-view video,
+        .camera-view canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .camera-view .pose-label {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .captured-previews {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+        .captured-previews img {
+            width: 70px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            border: 3px solid var(--gray-border);
+            transition: var(--transition);
+        }
+        .captured-previews img.filled {
+            border-color: #10B981;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+        }
+
+        /* ========== WELCOME / CATEGORIES ========== */
+        .welcome-banner {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #FFF7F0, #FFF0E5);
+            border-radius: var(--radius-xl);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(244, 121, 32, 0.08);
+            border-radius: 50%;
+        }
+        .welcome-banner .banner-logo {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .welcome-banner h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--black);
+            margin: 0;
+        }
+        .welcome-banner h1 span {
+            color: var(--orange);
+        }
+        .welcome-banner .subtitle {
+            color: var(--gray);
+            font-size: 15px;
+            margin-top: 4px;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .category-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--orange);
+        }
+        .category-card .cat-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+        .category-card:hover .cat-icon {
+            transform: scale(1.1);
+        }
+        .category-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--black);
+        }
+        .category-card .cat-desc {
+            font-size: 13px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+        .category-card .cat-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--orange);
+            color: white;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* ========== PRODUCTS GRID ========== */
+        .section-title {
+            font-size: 22px;
+            font-weight: 900;
+            margin: 24px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .back-btn {
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+        .section-title .back-btn:hover {
+            color: var(--orange);
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--orange-light);
+        }
+        .product-card .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: #F9FAFB;
+            padding: 12px;
+            cursor: pointer;
+        }
+        .product-card .product-info {
+            padding: 14px 16px;
+        }
+        .product-card .product-name {
+            font-weight: 700;
+            font-size: 15px;
+            margin: 0 0 4px;
+        }
+        .product-card .product-price {
+            font-weight: 900;
+            font-size: 20px;
+            color: var(--orange);
+            margin: 0;
+        }
+        .product-card .product-desc {
+            font-size: 12px;
+            color: var(--gray);
+            margin: 4px 0;
+        }
+        .product-card .product-actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 14px;
+            flex-wrap: wrap;
+        }
+        .product-card .product-actions .btn {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            justify-content: center;
+            font-size: 12px;
+            padding: 9px 12px;
+        }
+        .admin-controls {
+            display: flex;
+            gap: 6px;
+            padding: 0 16px 10px;
+            flex-wrap: wrap;
+        }
+        .admin-controls .btn {
+            font-size: 11px;
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+        .price-edit-input {
+            width: 80px;
+            padding: 6px 8px;
+            border: 2px solid var(--orange);
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 13px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* ========== MODAL ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 28px 24px;
+            max-width: 550px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            animation: modalSlide 0.35s ease;
+        }
+        @keyframes modalSlide {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal .close-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 5;
+        }
+        .modal .close-btn:hover {
+            background: #FEE2E2;
+            color: #EF4444;
+        }
+        .tryon-result {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            margin: 12px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .tryon-angles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .tryon-angles img {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            box-shadow: var(--shadow-sm);
+        }
+        .tryon-angles .angle-label {
+            text-align: center;
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        /* ========== LENS SELECTION ========== */
+        .lens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .lens-card {
+            background: var(--white);
+            border: 2px solid var(--gray-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .lens-card:hover,
+        .lens-card.selected {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 4px rgba(244, 121, 32, 0.1);
+        }
+        .lens-card .lens-color {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            border: 3px solid var(--gray-border);
+        }
+        .lens-card h4 {
+            font-size: 14px;
+            margin: 0;
+        }
+        .lens-card .lens-price {
+            color: var(--orange);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* ========== PRESCRIPTION UPLOAD ========== */
+        .upload-zone {
+            border: 3px dashed var(--gray-border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #FAFBFC;
+        }
+        .upload-zone:hover {
+            border-color: var(--orange);
+            background: var(--orange-light);
+        }
+        .upload-zone img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: var(--radius);
+            margin-top: 10px;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--black);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 999;
+            animation: toastUp 0.4s ease, toastFade 0.4s 2.6s ease forwards;
+            white-space: nowrap;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        @keyframes toastUp {
+            from {
+                transform: translateX(-50%) translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes toastFade {
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 14px;
+            }
+            .header-logo .logo-name {
+                font-size: 16px;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .product-card .product-img {
+                height: 150px;
+            }
+            .tryon-angles {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+            }
+            .modal {
+                padding: 20px 14px;
+                max-width: 95vw;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .welcome-banner h1 {
+                font-size: 22px;
+            }
+            .login-card {
+                padding: 24px 16px;
+            }
+        }
+        @media (max-width: 400px) {
+            .categories-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-card {
+                padding: 16px 10px;
+            }
+            .category-card .cat-icon {
+                font-size: 32px;
+            }
+            .category-card h3 {
+                font-size: 14px;
+            }
+        }
+
+        /* ========== EMPTY STATE ========== */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+        .empty-state .empty-icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* ========== SPINNER ========== */
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--gray-border);
+            border-top-color: var(--orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 16px auto;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Utility */
+        .text-center {
+            text-align: center;
+        }
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .mt-3 {
+            margin-top: 12px;
+        }
+        .mt-4 {
+            margin-top: 16px;
+        }
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+        .mb-3 {
+            margin-bottom: 12px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .gap-2 {
+            gap: 8px;
+        }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== LOADING SCREEN ==================== -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <span class="logo-icon">👓</span>
+            <span class="logo-text">دار النظارات</span>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header hidden" id="mainHeader">
+        <a class="header-logo" onclick="goHome()">
+            <div class="logo-img">👓</div>
+            <div class="logo-name">دار <span>النظارات</span></div>
+        </a>
+        <div class="header-actions">
+            <span class="admin-indicator hidden" id="adminBadge">🔧 مدير</span>
+            <div class="user-badge hidden" id="userBadge">
+                <img id="userAvatar" src="" alt="User">
+                <span id="userNameDisplay"></span>
+            </div>
+            <button class="btn btn-ghost btn-sm" id="logoutBtn" onclick="logout()">🚪 خروج</button>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTAINER ==================== -->
+    <div class="main-container" id="mainContainer">
+
+        <!-- LOGIN SCREEN -->
+        <div class="screen active" id="screenLogin">
+            <div class="login-container">
+                <div class="login-card">
+                    <span style="font-size:56px;">👓</span>
+                    <h2>مرحباً بك في دار النظارات</h2>
+                    <p>جرب النظارات والعدسات على وجهك قبل الشراء باستخدام الذكاء الاصطناعي</p>
+                    <button class="google-btn" id="googleLoginBtn" onclick="initiateGoogleLogin()">
+                        <span style="font-size:20px;">G</span> تسجيل الدخول بحساب قوقل
+                    </button>
+                    <div class="divider">أو</div>
+                    <button class="btn btn-outline btn-lg" onclick="loginAsGuest()">👤 الدخول كضيف</button>
+                    <p style="font-size:11px;color:var(--gray);">عند الدخول كضيف، سيُطلب منك تصوير وجهك من 3 زوايا</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FACE CAPTURE SCREEN -->
+        <div class="screen" id="screenFaceCapture">
+            <div class="face-capture-container">
+                <h2 style="font-weight:900;margin-bottom:4px;">📸 تصوير الوجه</h2>
+                <p style="color:var(--gray);">نحتاج 3 زوايا لوجهك لتجربة أفضل</p>
+                <div class="capture-steps">
+                    <div class="capture-step current" id="step1">1</div>
+                    <div class="capture-step" id="step2">2</div>
+                    <div class="capture-step" id="step3">3</div>
+                </div>
+                <div class="camera-view">
+                    <video id="cameraVideo" autoplay playsinline></video>
+                    <canvas id="cameraCanvas" class="hidden"></canvas>
+                    <div class="pose-label" id="poseLabel">من الأمام</div>
+                </div>
+                <div class="captured-previews">
+                    <img id="previewFront" src="" alt="أمامي" class="preview-placeholder" style="background:#f3f4f6;">
+                    <img id="previewRight" src="" alt="يمين" class="preview-placeholder" style="background:#f3f4f6;">
+                    <img id="previewLeft" src="" alt="يسار" class="preview-placeholder" style="background:#f3f4f6;">
+                </div>
+                <button class="btn btn-primary btn-lg" id="captureBtn" onclick="capturePhoto()">📷 التقاط الصورة</button>
+                <button class="btn btn-outline mt-2 hidden" id="skipCaptureBtn" onclick="finishFaceCapture()">✅ إنهاء التصوير والمتابعة</button>
+                <p style="font-size:12px;color:var(--gray);margin-top:8px;" id="captureHint">الزاوية الأولى: انظر مباشرة إلى الكاميرا</p>
+            </div>
+        </div>
+
+        <!-- HOME / CATEGORIES SCREEN -->
+        <div class="screen" id="screenHome">
+            <div class="welcome-banner">
+                <div class="banner-logo">👓</div>
+                <h1>أهلاً بك في <span>دار النظارات</span></h1>
+                <p class="subtitle">اختر الفئة التي تريد تصفحها</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" onclick="showCategory('sunglasses')">
+                    <span class="cat-icon">🕶️</span>
+                    <h3>نظارات شمسية</h3>
+                    <p class="cat-desc">أحدث موديلات النظارات الشمسية</p>
+                </div>
+                <div class="category-card" onclick="showCategory('medical')">
+                    <span class="cat-icon">👓</span>
+                    <h3>نظارات طبية</h3>
+                    <p class="cat-desc">إطارات وعدسات طبية متنوعة</p>
+                </div>
+                <div class="category-card" onclick="showCategory('contacts')">
+                    <span class="cat-icon">👁️</span>
+                    <h3>عدسات لاصقة</h3>
+                    <p class="cat-desc">عدسات ملونة بألوان رائعة</p>
+                </div>
+                <div class="category-card" onclick="showCategory('protective')">
+                    <span class="cat-icon">🥽</span>
+                    <h3>نظارات حماية</h3>
+                    <p class="cat-desc">نظارات للحماية والسلامة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCTS LISTING SCREEN -->
+        <div class="screen" id="screenProducts">
+            <div class="section-title">
+                <span class="back-btn" onclick="goHome()">⬅️</span>
+                <span id="productsTitle">المنتجات</span>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="empty-state hidden" id="emptyProducts">
+                <span class="empty-icon">📭</span>
+                <p>لا توجد منتجات حالياً</p>
+            </div>
+            <!-- Admin: Add product button -->
+            <div class="text-center mt-4 hidden" id="adminAddBtnContainer">
+                <button class="btn btn-primary" onclick="showAddProductModal()">➕ إضافة منتج جديد</button>
+            </div>
+        </div>
+
+        <!-- LENS SELECTION SCREEN (for medical glasses) -->
+        <div class="screen" id="screenLensSelection">
+            <div class="section-title">
+                <span class="back-btn" onclick="goBackToMedicalFrames()">⬅️</span>
+                <span>اختيار العدسة الطبية</span>
+            </div>
+            <div class="lens-grid" id="lensGrid"></div>
+            <div class="empty-state hidden" id="emptyLenses">
+                <span class="empty-icon">🔍</span>
+                <p>لا توجد عدسات متاحة</p>
+            </div>
+            <div class="text-center mt-4 hidden" id="adminAddLensBtnContainer">
+                <button class="btn btn-primary" onclick="showAddLensModal()">➕ إضافة عدسة جديدة</button>
+            </div>
+        </div>
+
+        <!-- PRESCRIPTION UPLOAD SCREEN -->
+        <div class="screen" id="screenPrescription">
+            <div class="section-title">
+                <span class="back-btn" onclick="goBackToLensSelection()">⬅️</span>
+                <span>📋 إرفاق صورة الفحص</span>
+            </div>
+            <div class="upload-zone" id="prescriptionUploadZone" onclick="document.getElementById('prescriptionFileInput').click()">
+                <span style="font-size:48px;">📄</span>
+                <p>اضغط هنا لإرفاق صورة الفحص الطبي</p>
+                <p style="font-size:12px;color:var(--gray);">أو اسحب وأفلت الصورة هنا</p>
+                <img id="prescriptionPreview" src="" alt="معاينة الفحص" class="hidden">
+            </div>
+            <input type="file" id="prescriptionFileInput" accept="image/*" class="hidden" onchange="handlePrescriptionUpload(event)">
+            <div class="text-center mt-4">
+                <button class="btn btn-primary btn-lg" id="confirmPrescriptionBtn" onclick="confirmPrescriptionAndSend()" disabled>
+                    ✅ موافق - إرسال الطلب إلى واتساب
+                </button>
+            </div>
+            <p style="text-align:center;color:var(--gray);font-size:12px;margin-top:8px;">
+                الإطار المختار: <strong id="selectedFrameName">-</strong> | العدسة المختارة: <strong id="selectedLensName">-</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL OVERLAY ==================== -->
+    <div class="modal-overlay hidden" id="modalOverlay">
+        <div class="modal" id="modalContent"></div>
+    </div>
+
+    <!-- ==================== TOAST CONTAINER ==================== -->
+    <div id="toastContainer"></div>
+
+    <!-- ==================== HIDDEN FILE INPUTS ==================== -->
+    <input type="file" id="productImageInput" accept="image/*" class="hidden" onchange="handleProductImageUpload(event)">
+    <input type="file" id="lensImageInput" accept="image/*" class="hidden" onchange="handleLensImageUpload(event)">
+
+    <script>
+        // ==================== GLOBAL STATE ====================
+        const API_TOKEN = 'R8_NGsb8NkAge89aArhHOMJq15C6MK4Ug71zhgSK';
+        const API_URL =
+            'https://3a9b5025-5af9-43a7-8a2e-73e10765bff6-00-2z0xh3srz9ytk.sisko.replit.dev/api/tryon';
+        const ADMIN_EMAIL = 'motasembelal31@gmail.com';
+        const WHATSAPP_QR_LINK = 'https://wa.me/qr/WFXDMTVPE2ZSI1';
+        const WHATSAPP_NUMBER = '962790000000'; // سيتم تحديثه - الرقم المستخرج من رابط QR
+        const WHATSAPP_URL = 'https://wa.me/962790000000'; // رابط الواتساب المباشر
+
+        let currentUser = null; // {email, name, avatar, isGuest, faceImages: {front, right, left}}
+        let isAdmin = false;
+        let currentCategory = null; // 'sunglasses' | 'medical' | 'contacts' | 'protective'
+        let captureStep = 1; // 1=front, 2=right, 3=left
+        let faceImages = { front: null, right: null, left: null };
+        let cameraStream = null;
+        let selectedMedicalFrame = null;
+        let selectedLens = null;
+        let prescriptionImage = null;
+        let pendingProductImage = null;
+        let pendingLensImage = null;
+
+        // ==================== PRODUCT DATA ====================
+        const defaultProducts = {
+            sunglasses: [
+                { id: 'sg1', name: 'نظارة شمسية كلاسيكية سوداء', price: 45, image: '',
+                    desc: 'إطار أسود كلاسيكي أنيق', category: 'sunglasses' },
+                { id: 'sg2', name: 'نظارة شمسية طيار ذهبية', price: 55, image: '',
+                    desc: 'تصميم طيار عصري بلون ذهبي', category: 'sunglasses' },
+                { id: 'sg3', name: 'نظارة شمسية مربعة بنية', price: 40, image: '',
+                    desc: 'إطار مربع بني داكن', category: 'sunglasses' },
+                { id: 'sg4', name: 'نظارة شمسية رياضية', price: 50, image: '', desc: 'تصميم رياضي متين وخفيف',
+                    category: 'sunglasses' },
+            ],
+            medical: [
+                { id: 'md1', name: 'إطار طبي أسود رفيع', price: 60, image: '', desc: 'إطار معدني أسود رفيع وأنيق',
+                    category: 'medical' },
+                { id: 'md2', name: 'إطار طبي شفاف', price: 55, image: '', desc: 'إطار بلاستيكي شفاف عصري',
+                    category: 'medical' },
+                { id: 'md3', name: 'إطار طبي ذهبي دائري', price: 70, image: '', desc: 'إطار دائري ذهبي كلاسيكي',
+                    category: 'medical' },
+                { id: 'md4', name: 'إطار طبي أسود سميك', price: 50, image: '', desc: 'إطار أسود سميك جريء',
+                    category: 'medical' },
+            ],
+            lenses: [
+                { id: 'ln1', name: 'عدسة شفافة قياسية', price: 30, image: '', desc: 'عدسة طبية شفافة عادية',
+                    color: '#E8E8E8', category: 'lenses' },
+                { id: 'ln2', name: 'عدسة مضادة للانعكاس', price: 50, image: '', desc: 'طبقة مضادة للانعكاس والوهج',
+                    color: '#D0E8FF', category: 'lenses' },
+                { id: 'ln3', name: 'عدسة فوتوكروميك (متغيرة)', price: 80, image: '',
+                    desc: 'تتغير مع الضوء - شفافة داخلًا وداكنة خارجًا', color: '#C0C0C0', category: 'lenses' },
+                { id: 'ln4', name: 'عدسة حماية من الأشعة الزرقاء', price: 65, image: '',
+                    desc: 'تحمي من أشعة الشاشات الزرقاء', color: '#FFF8E7', category: 'lenses' },
+            ],
+            contacts: [
+                { id: 'ct1', name: 'عدسات لاصقة زرقاء', price: 35, image: '', desc: 'لون أزرق طبيعي جذاب',
+                    color: '#4A90D9', category: 'contacts' },
+                { id: 'ct2', name: 'عدسات لاصقة خضراء', price: 35, image: '', desc: 'لون أخضر زمردي مميز',
+                    color: '#2D8C4A', category: 'contacts' },
+                { id: 'ct3', name: 'عدسات لاصقة رمادية', price: 30, image: '', desc: 'لون رمادي أنيق وطبيعي',
+                    color: '#9CA3AF', category: 'contacts' },
+                { id: 'ct4', name: 'عدسات لاصقة عسلية', price: 35, image: '', desc: 'لون عسلي دافئ وجميل',
+                    color: '#D4A44A', category: 'contacts' },
+                { id: 'ct5', name: 'عدسات لاصقة بنفسجية', price: 40, image: '', desc: 'لون بنفسجي فريد وجريء',
+                    color: '#7C3AED', category: 'contacts' },
+            ],
+            protective: [
+                { id: 'pr1', name: 'نظارة حماية شفافة', price: 25, image: '', desc: 'نظارة حماية للعمل والمختبرات',
+                    category: 'protective' },
+                { id: 'pr2', name: 'نظارة حماية صفراء', price: 28, image: '', desc: 'عدسات صفراء لتعزيز التباين',
+                    category: 'protective' },
+                { id: 'pr3', name: 'نظارة حماية رياضية', price: 35, image: '', desc: 'تصميم رياضي مقاوم للصدمات',
+                    category: 'protective' },
+            ],
+        };
+
+        function loadProducts() {
+            try {
+                const saved = localStorage.getItem('dar_alnadarat_products');
+                if (saved) return JSON.parse(saved);
+            } catch (e) {}
+            // Deep clone default
+            const def = JSON.parse(JSON.stringify(defaultProducts));
+            localStorage.setItem('dar_alnadarat_products', JSON.stringify(def));
+            return def;
+        }
+
+        function saveProducts(products) {
+            localStorage.setItem('dar_alnadarat_products', JSON.stringify(products));
+        }
+
+        let products = loadProducts();
+
+        function getCategoryProducts(category) {
+            return products[category] || [];
+        }
+
+        function updateProduct(category, productId, updates) {
+            const idx = products[category].findIndex(p => p.id === productId);
+            if (idx >= 0) {
+                products[category][idx] = { ...products[category][idx], ...updates };
+                saveProducts(products);
+                return true;
+            }
+            return false;
+        }
+
+        function deleteProduct(category, productId) {
+            products[category] = products[category].filter(p => p.id !== productId);
+            saveProducts(products);
+        }
+
+        function addProduct(category, product) {
+            if (!products[category]) products[category] = [];
+            product.id = category + '_' + Date.now();
+            product.category = category;
+            products[category].push(product);
+            saveProducts(products);
+            return product;
+        }
+
+        function addLens(lens) {
+            if (!products['lenses']) products['lenses'] = [];
+            lens.id = 'ln_' + Date.now();
+            lens.category = 'lenses';
+            products['lenses'].push(lens);
+            saveProducts(products);
+            return lens;
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hide loading screen after a short delay
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+                document.getElementById('mainHeader').classList.remove('hidden');
+                checkExistingSession();
+            }, 1200);
+
+            // Setup prescription drop zone
+            const dropZone = document.getElementById('prescriptionUploadZone');
+            if (dropZone) {
+                dropZone.addEventListener('dragover', (e) => { e.preventDefault();
+                    dropZone.style.borderColor = 'var(--orange)'; });
+                dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = 'var(--gray-border)'; });
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropZone.style.borderColor = 'var(--gray-border)';
+                    const file = e.dataTransfer.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                        handlePrescriptionFile(file);
+                    }
+                });
+            }
+        });
+
+        function checkExistingSession() {
+            const savedSession = localStorage.getItem('dar_alnadarat_session');
+            if (savedSession) {
+                try {
+                    const session = JSON.parse(savedSession);
+                    if (session.email || session.isGuest) {
+                        currentUser = session;
+                        isAdmin = (session.email === ADMIN_EMAIL);
+                        faceImages = session.faceImages || { front: null, right: null, left: null };
+                        updateUIForLoggedInUser();
+                        showScreen('screenHome');
+                        return;
+                    }
+                } catch (e) {}
+            }
+            showScreen('screenLogin');
+        }
+
+        // ==================== SCREEN MANAGEMENT ====================
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const screen = document.getElementById(screenId);
+            if (screen) screen.classList.add('active');
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            currentCategory = null;
+            selectedMedicalFrame = null;
+            selectedLens = null;
+            prescriptionImage = null;
+            document.getElementById('prescriptionPreview')?.classList.add('hidden');
+            document.getElementById('confirmPrescriptionBtn')?.setAttribute('disabled', '');
+            showScreen('screenHome');
+            updateAdminUI();
+        }
+
+        // ==================== AUTH ====================
+        function initiateGoogleLogin() {
+            // For demo: simulate Google login
+            // In production, use Google Identity Services
+            const simulatedEmail = prompt(
+                '🔐 محاكاة تسجيل الدخول بحساب قوقل\n\nأدخل البريد الإلكتروني للتجربة:\n(للدخول كمدير استخدم: ' +
+                ADMIN_EMAIL + ')\n\nملاحظة: في الموقع الحقيقي سيتم استخدام Google OAuth', '');
+            if (simulatedEmail && simulatedEmail.includes('@')) {
+                completeGoogleLogin({
+                    email: simulatedEmail,
+                    name: simulatedEmail.split('@')[0],
+                    picture: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(simulatedEmail.split(
+                        '@')[0]) + '&background=F47920&color=fff&size=100',
+                });
+            } else if (simulatedEmail) {
+                showToast('⚠️ الرجاء إدخال بريد إلكتروني صحيح');
+            }
+        }
+
+        function completeGoogleLogin(googleUser) {
+            currentUser = {
+                email: googleUser.email,
+                name: googleUser.name,
+                avatar: googleUser.picture,
+                isGuest: false,
+                faceImages: { front: null, right: null, left: null },
+            };
+            isAdmin = (googleUser.email === ADMIN_EMAIL);
+            faceImages = { front: null, right: null, left: null };
+            saveSession();
+            updateUIForLoggedInUser();
+
+            // Check if face images exist
+            if (!faceImages.front && !faceImages.right && !faceImages.left) {
+                startFaceCapture();
+            } else {
+                showScreen('screenHome');
+                updateAdminUI();
+                showToast('👋 أهلاً بك ' + currentUser.name + '!');
+            }
+        }
+
+        function loginAsGuest() {
+            currentUser = {
+                email: null,
+                name: 'ضيف',
+                avatar: 'https://ui-avatars.com/api/?name=ضيف&background=6B7280&color=fff&size=100',
+                isGuest: true,
+                faceImages: { front: null, right: null, left: null },
+            };
+            isAdmin = false;
+            faceImages = { front: null, right: null, left: null };
+            saveSession();
+            updateUIForLoggedInUser();
+            startFaceCapture();
+            showToast('👋 مرحباً بك كضيف! الرجاء تصوير وجهك للمتابعة.');
+        }
+
+        function logout() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            currentUser = null;
+            isAdmin = false;
+            faceImages = { front: null, right: null, left: null };
+            selectedMedicalFrame = null;
+            selectedLens = null;
+            prescriptionImage = null;
+            currentCategory = null;
+            captureStep = 1;
+            localStorage.removeItem('dar_alnadarat_session');
+            document.getElementById('userBadge').classList.add('hidden');
+            document.getElementById('adminBadge').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.add('hidden');
+            document.getElementById('prescriptionPreview')?.classList.add('hidden');
+            document.getElementById('confirmPrescriptionBtn')?.setAttribute('disabled', '');
+            showScreen('screenLogin');
+            updateAdminUI();
+            showToast('👋 تم تسجيل الخروج');
+        }
+
+        function saveSession() {
+            if (currentUser) {
+                currentUser.faceImages = faceImages;
+                localStorage.setItem('dar_alnadarat_session', JSON.stringify(currentUser));
+            }
+        }
+
+        function updateUIForLoggedInUser() {
+            const badge = document.getElementById('userBadge');
+            const avatar = document.getElementById('userAvatar');
+            const nameDisplay = document.getElementById('userNameDisplay');
+            const adminBadge = document.getElementById('adminBadge');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (currentUser) {
+                badge.classList.remove('hidden');
+                logoutBtn.classList.remove('hidden');
+                avatar.src = currentUser.avatar || 'https://ui-avatars.com/api/?name=User&background=ccc&color=fff&size=100';
+                nameDisplay.textContent = currentUser.name || 'مستخدم';
+                if (isAdmin) {
+                    adminBadge.classList.remove('hidden');
+                } else {
+                    adminBadge.classList.add('hidden');
+                }
+            }
+            updateAdminUI();
+        }
+
+        function updateAdminUI() {
+            const adminAddBtn = document.getElementById('adminAddBtnContainer');
+            const adminAddLensBtn = document.getElementById('adminAddLensBtnContainer');
+            if (isAdmin && document.getElementById('screenProducts').classList.contains('active')) {
+                if (currentCategory && currentCategory !== 'contacts') {
+                    adminAddBtn?.classList.remove('hidden');
+                } else {
+                    adminAddBtn?.classList.add('hidden');
+                }
+                if (currentCategory === 'medical' && document.getElementById('screenLensSelection').classList.contains(
+                        'active')) {
+                    adminAddLensBtn?.classList.remove('hidden');
+                } else {
+                    adminAddLensBtn?.classList.add('hidden');
+                }
+            } else {
+                adminAddBtn?.classList.add('hidden');
+                adminAddLensBtn?.classList.add('hidden');
+            }
+            // Show admin controls on product cards
+            document.querySelectorAll('.admin-controls').forEach(el => {
+                if (isAdmin) el.classList.remove('hidden');
+                else el.classList.add('hidden');
+            });
+            document.querySelectorAll('.admin-only').forEach(el => {
+                if (isAdmin) el.classList.remove('hidden');
+                else el.classList.add('hidden');
+            });
+            // Show "تغيير" at bottom for admin
+            let changeIndicator = document.getElementById('adminChangeIndicator');
+            if (isAdmin) {
+                if (!changeIndicator) {
+                    changeIndicator = document.createElement('div');
+                    changeIndicator.id = 'adminChangeIndicator';
+                    changeIndicator.style.cssText =
+                        'position:fixed;bottom:16px;right:16px;background:var(--orange);color:white;padding:8px 16px;border-radius:50px;font-weight:700;font-size:13px;z-index:150;box-shadow:var(--shadow-lg);cursor:pointer;';
+                    changeIndicator.textContent = '🔧 تغيير';
+                    changeIndicator.onclick = () => {
+                        if (currentCategory) {
+                            showCategory(currentCategory);
+                        } else {
+                            goHome();
+                        }
+                        showToast('🔧 وضع التعديل مفعل - يمكنك تعديل المنتجات');
+                    };
+                    document.body.appendChild(changeIndicator);
+                }
+                changeIndicator.style.display = 'block';
+            } else if (changeIndicator) {
+                changeIndicator.style.display = 'none';
+            }
+        }
+
+        // ==================== FACE CAPTURE ====================
+        async function startFaceCapture() {
+            captureStep = 1;
+            faceImages = { front: null, right: null, left: null };
+            updateCaptureUI();
+            showScreen('screenFaceCapture');
+            document.getElementById('skipCaptureBtn').classList.add('hidden');
+            document.getElementById('captureBtn').classList.remove('hidden');
+            await startCamera();
+        }
+
+        async function startCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+            }
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 800 } }
+                });
+                const video = document.getElementById('cameraVideo');
+                video.srcObject = cameraStream;
+                video.style.display = 'block';
+                document.getElementById('cameraCanvas').classList.add('hidden');
+            } catch (err) {
+                showToast('⚠️ تعذر الوصول إلى الكاميرا. يمكنك المتابعة بدون تصوير.');
+                document.getElementById('captureBtn').classList.add('hidden');
+                document.getElementById('skipCaptureBtn').classList.remove('hidden');
+                document.getElementById('cameraVideo').style.display = 'none';
+            }
+        }
+
+        function updateCaptureUI() {
+            const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById(
+                'step3')];
+            const poseLabel = document.getElementById('poseLabel');
+            const labels = ['من الأمام', 'من اليمين', 'من اليسار'];
+            const hints = [
+                'الزاوية الأولى: انظر مباشرة إلى الكاميرا',
+                'الزاوية الثانية: أدر وجهك قليلاً إلى اليمين',
+                'الزاوية الثالثة: أدر وجهك قليلاً إلى اليسار',
+            ];
+
+            steps.forEach((step, i) => {
+                step.classList.remove('current', 'done');
+                if (i + 1 < captureStep) step.classList.add('done');
+                if (i + 1 === captureStep) step.classList.add('current');
+            });
+            if (poseLabel && labels[captureStep - 1]) poseLabel.textContent = labels[captureStep - 1];
+            const hintEl = document.getElementById('captureHint');
+            if (hintEl && hints[captureStep - 1]) hintEl.textContent = hints[captureStep - 1];
+
+            // Update previews
+            ['previewFront', 'previewRight', 'previewLeft'].forEach((pid, i) => {
+                const img = document.getElementById(pid);
+                const keys = ['front', 'right', 'left'];
+                if (faceImages[keys[i]]) {
+                    img.src = faceImages[keys[i]];
+                    img.classList.add('filled');
+                } else {
+                    img.src = '';
+                    img.classList.remove('filled');
+                }
+            });
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('cameraVideo');
+            const canvas = document.getElementById('cameraCanvas');
+            if (!video.srcObject) {
+                // No camera - skip
+                advanceCaptureStep(null);
+                return;
+            }
+            canvas.width = video.videoWidth || 480;
+            canvas.height = video.videoHeight || 640;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/jpeg', 0.85);
+            advanceCaptureStep(imageData);
+        }
+
+        function advanceCaptureStep(imageData) {
+            const keys = ['front', 'right', 'left'];
+            if (imageData) {
+                faceImages[keys[captureStep - 1]] = imageData;
+            }
+            captureStep++;
+            if (captureStep > 3) {
+                finishFaceCapture();
+            } else {
+                updateCaptureUI();
+                if (captureStep === 3 && !document.getElementById('cameraVideo').srcObject) {
+                    // No camera, auto-finish
+                    finishFaceCapture();
+                }
+            }
+        }
+
+        function finishFaceCapture() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
+            if (currentUser) {
+                currentUser.faceImages = faceImages;
+                saveSession();
+            }
+            showScreen('screenHome');
+            updateAdminUI();
+            const hasImages = faceImages.front || faceImages.right || faceImages.left;
+            showToast(hasImages ? '✅ تم حفظ صور الوجه بنجاح!' : '✅ تم المتابعة بدون تصوير');
+        }
+
+        // ==================== CATEGORIES & PRODUCTS ====================
+        function showCategory(category) {
+            currentCategory = category;
+            selectedMedicalFrame = null;
+            selectedLens = null;
+            prescriptionImage = null;
+            document.getElementById('prescriptionPreview')?.classList.add('hidden');
+            document.getElementById('confirmPrescriptionBtn')?.setAttribute('disabled', '');
+
+            const titles = {
+                'sunglasses': '🕶️ النظارات الشمسية',
+                'medical': '👓 النظارات الطبية - الإطارات',
+                'contacts': '👁️ العدسات اللاصقة',
+                'protective': '🥽 نظارات الحماية',
+            };
+            document.getElementById('productsTitle').textContent = titles[category] || 'المنتجات';
+            showScreen('screenProducts');
+            renderProducts(category);
+            updateAdminUI();
+        }
+
+        function renderProducts(category) {
+            const grid = document.getElementById('productsGrid');
+            const empty = document.getElementById('emptyProducts');
+            const items = getCategoryProducts(category);
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                empty.classList.remove('hidden');
+                grid.classList.add('hidden');
+            } else {
+                empty.classList.add('hidden');
+                grid.classList.remove('hidden');
+                items.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        ${product.image ? `<img src="${product.image}" alt="${product.name}" class="product-img" onclick="previewProductImage('${product.image}')">` 
+                        : `<div class="product-img" style="display:flex;align-items:center;justify-content:center;font-size:60px;background:#f9fafb;">👓</div>`}
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-price">${product.price} د.أ</p>
+                            ${product.desc ? `<p class="product-desc">${product.desc}</p>` : ''}
+                        </div>
+                        ${isAdmin ? `
+                        <div class="admin-controls">
+                            <input type="number" class="price-edit-input" value="${product.price}" 
+                                onchange="updateProductPrice('${category}', '${product.id}', this.value)" 
+                                title="تعديل السعر" style="width:70px;">
+                            <button class="btn btn-ghost btn-sm" onclick="deleteProductAndRefresh('${category}', '${product.id}')" title="حذف">🗑️</button>
+                            <button class="btn btn-ghost btn-sm" onclick="editProductImage('${category}', '${product.id}')" title="تغيير الصورة">🖼️</button>
+                        </div>` : ''}
+                        <div class="product-actions">
+                            <button class="btn btn-outline btn-sm" onclick="tryOnProduct('${category}', '${product.id}')">👁️ تجربة</button>
+                            <button class="btn btn-primary btn-sm" onclick="selectProduct('${category}', '${product.id}')">✅ اختيار</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+            document.getElementById('adminAddBtnContainer').classList.toggle('hidden', !isAdmin);
+            updateAdminUI();
+        }
+
+        function updateProductPrice(category, productId, newPrice) {
+            const price = parseFloat(newPrice);
+            if (isNaN(price) || price < 0) return;
+            updateProduct(category, productId, { price: price });
+            showToast('✅ تم تحديث السعر');
+        }
+
+        function deleteProductAndRefresh(category, productId) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                deleteProduct(category, productId);
+                renderProducts(category);
+                showToast('🗑️ تم حذف المنتج');
+            }
+        }
+
+        function editProductImage(category, productId) {
+            pendingProductImage = { category, productId };
+            document.getElementById('productImageInput').click();
+        }
+
+        function handleProductImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file || !pendingProductImage) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                updateProduct(pendingProductImage.category, pendingProductImage.productId, { image: e.target.result });
+                renderProducts(pendingProductImage.category);
+                showToast('🖼️ تم تحديث صورة المنتج');
+                pendingProductImage = null;
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function previewProductImage(imageSrc) {
+            if (!imageSrc) return;
+            const modal = document.getElementById('modalContent');
+            modal.innerHTML = `
+                <button class="close-btn" onclick="closeModal()">✕</button>
+                <img src="${imageSrc}" style="width:100%;border-radius:var(--radius-lg);" alt="صورة المنتج">
+            `;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        }
+
+        function showAddProductModal() {
+            if (!isAdmin || !currentCategory) return;
+            const modal = document.getElementById('modalContent');
+            modal.innerHTML = `
+                <button class="close-btn" onclick="closeModal()">✕</button>
+                <h3 style="font-weight:900;margin-bottom:16px;">➕ إضافة منتج جديد</h3>
+                <label style="font-weight:600;">اسم المنتج:</label>
+                <input type="text" id="newProductName" placeholder="أدخل الاسم" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin:8px 0;font-family:inherit;">
+                <label style="font-weight:600;">السعر (د.أ):</label>
+                <input type="number" id="newProductPrice" placeholder="0" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin:8px 0;font-family:inherit;">
+                <label style="font-weight:600;">الوصف:</label>
+                <input type="text" id="newProductDesc" placeholder="وصف مختصر" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin:8px 0;font-family:inherit;">
+                <label style="font-weight:600;">الصورة:</label>
+                <input type="file" id="newProductImageFile" accept="image/*" style="margin:8px 0;">
+                <button class="btn btn-primary" style="width:100%;margin-top:12px;" onclick="confirmAddProduct()">✅ إضافة</button>
+            `;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        }
+
+        function confirmAddProduct() {
+            const name = document.getElementById('newProductName')?.value?.trim();
+            const price = parseFloat(document.getElementById('newProductPrice')?.value);
+            const desc = document.getElementById('newProductDesc')?.value?.trim();
+            const fileInput = document.getElementById('newProductImageFile');
+            if (!name || isNaN(price)) {
+                showToast('⚠️ الرجاء ملء الاسم والسعر');
+                return;
+            }
+            const doAdd = (imageData) => {
+                const newProd = { name, price, desc: desc || '', image: imageData || '', category: currentCategory };
+                addProduct(currentCategory, newProd);
+                closeModal();
+                renderProducts(currentCategory);
+                showToast('✅ تمت إضافة المنتج');
+            };
+            if (fileInput && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => doAdd(e.target.result);
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                doAdd(null);
+            }
+        }
+
+        function showAddLensModal() {
+            if (!isAdmin) return;
+            const modal = document.getElementById('modalContent');
+            modal.innerHTML = `
+                <button class="close-btn" onclick="closeModal()">✕</button>
+                <h3 style="font-weight:900;margin-bottom:16px;">➕ إضافة عدسة جديدة</h3>
+                <label style="font-weight:600;">اسم العدسة:</label>
+                <input type="text" id="newLensName" placeholder="أدخل الاسم" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin:8px 0;font-family:inherit;">
+                <label style="font-weight:600;">السعر (د.أ):</label>
+                <input type="number" id="newLensPrice" placeholder="0" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin:8px 0;font-family:inherit;">
+                <label style="font-weight:600;">الوصف:</label>
+                <input type="text" id="newLensDesc" placeholder="وصف مختصر" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin:8px 0;font-family:inherit;">
+                <label style="font-weight:600;">اللون:</label>
+                <input type="color" id="newLensColor" value="#888888" style="width:60px;height:40px;border-radius:8px;border:1px solid #ddd;margin:8px 0;">
+                <label style="font-weight:600;">الصورة:</label>
+                <input type="file" id="newLensImageFile" accept="image/*" style="margin:8px 0;">
+                <button class="btn btn-primary" style="width:100%;margin-top:12px;" onclick="confirmAddLens()">✅ إضافة</button>
+            `;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        }
+
+        function confirmAddLens() {
+            const name = document.getElementById('newLensName')?.value?.trim();
+            const price = parseFloat(document.getElementById('newLensPrice')?.value);
+            const desc = document.getElementById('newLensDesc')?.value?.trim();
+            const color = document.getElementById('newLensColor')?.value || '#888888';
+            const fileInput = document.getElementById('newLensImageFile');
+            if (!name || isNaN(price)) {
+                showToast('⚠️ الرجاء ملء الاسم والسعر');
+                return;
+            }
+            const doAdd = (imageData) => {
+                addLens({ name, price, desc: desc || '', color, image: imageData || '', category: 'lenses' });
+                closeModal();
+                if (document.getElementById('screenLensSelection').classList.contains('active')) {
+                    renderLensSelection();
+                }
+                showToast('✅ تمت إضافة العدسة');
+            };
+            if (fileInput && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => doAdd(e.target.result);
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                doAdd(null);
+            }
+        }
+
+        // ==================== TRY-ON & AI ====================
+        async function tryOnProduct(category, productId) {
+            const items = getCategoryProducts(category);
+            const product = items.find(p => p.id === productId);
+            if (!product) return;
+
+            // Need face image
+            const faceImg = faceImages.front || faceImages.right || faceImages.left;
+            if (!faceImg) {
+                showToast('⚠️ الرجاء تصوير وجهك أولاً من خلال تسجيل الدخول مرة أخرى');
+                return;
+            }
+
+            // Show loading modal
+            const modal = document.getElementById('modalContent');
+            modal.innerHTML = `
+                <button class="close-btn" onclick="closeModal()">✕</button>
+                <h3 style="font-weight:900;">🔮 جاري تجربة ${product.name}...</h3>
+                <div class="spinner"></div>
+                <p style="text-align:center;color:var(--gray);">الذكاء الاصطناعي يقوم بتركيب النظارة على وجهك...</p>
+                <p style="text-align:center;font-size:11px;color:var(--gray);">قد يستغرق 10-30 ثانية</p>
+            `;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+
+            try {
+                const results = {};
+                const angles = ['front', 'right', 'left'];
+                const angleLabels = ['من الأمام', 'من اليمين', 'من اليسار'];
+
+                for (let i = 0; i < angles.length; i++) {
+                    const angleFace = faceImages[angles[i]];
+                    if (!angleFace) continue;
+                    try {
+                        const resultUrl = await callTryOnAPI(angleFace, product);
+                        results[angles[i]] = resultUrl;
+                    } catch (e) {
+                        console.log(`Try-on failed for ${angles[i]}:`, e);
+                        results[angles[i]] = null;
+                    }
+                }
+
+                // Display results
+                let resultHTML =
+                    '<button class="close-btn" onclick="closeModal()">✕</button>';
+                resultHTML +=
+                    `<h3 style="font-weight:900;text-align:center;">👓 ${product.name}</h3>`;
+                resultHTML += '<div class="tryon-angles">';
+                for (let i = 0; i < angles.length; i++) {
+                    const imgSrc = results[angles[i]] || faceImages[angles[i]] || '';
+                    resultHTML += `
+                        <div>
+                            <img src="${imgSrc}" alt="${angleLabels[i]}" onerror="this.style.background='#f3f4f6';this.alt='غير متوفر';">
+                            <div class="angle-label">${angleLabels[i]}</div>
+                        </div>`;
+                }
+                resultHTML += '</div>';
+                resultHTML +=
+                    '<p style="text-align:center;font-size:12px;color:var(--gray);">🟠 النظارة مركبة على وجهك من 3 زوايا</p>';
+                resultHTML += `
+                    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
+                        <button class="btn btn-primary" onclick="selectProduct('${category}', '${productId}');closeModal();">✅ اختيار وإرسال للواتساب</button>
+                        <button class="btn btn-outline" onclick="closeModal()">إغلاق</button>
+                    </div>`;
+                modal.innerHTML = resultHTML;
+            } catch (err) {
+                modal.innerHTML = `
+                    <button class="close-btn" onclick="closeModal()">✕</button>
+                    <h3 style="font-weight:900;">⚠️ خطأ في التجربة</h3>
+                    <p>${err.message || 'حدث خطأ أثناء معالجة الصورة. الرجاء المحاولة لاحقاً.'}</p>
+                    <button class="btn btn-outline" onclick="closeModal()">إغلاق</button>
+                `;
+            }
+        }
+
+        async function callTryOnAPI(faceBase64, product) {
+            // Call the Replit server which forwards to Replicate
+            const prompt =
+                `Put these exact glasses on the person's face naturally, realistic fitting on nose and ears, preserve face identity, professional lighting, photorealistic`;
+
+            const payload = {
+                image: faceBase64,
+                prompt: prompt,
+                glasses_image: product.image || null,
+                glasses_description: product.name + ' - ' + (product.desc || ''),
+                strength: 0.75,
+                guidance_scale: 7.5,
+                steps: 30,
+            };
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + API_TOKEN,
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errText = await response.text();
+                throw new Error('API Error: ' + response.status + ' - ' + errText);
+            }
+
+            const data = await response.json();
+            // Expect { output: "url" } or { image_url: "url" }
+            const resultUrl = data.output || data.image_url || data.result || data.url;
+            if (resultUrl) return resultUrl;
+
+            // If the API returns base64
+            if (data.image_base64) return 'data:image/jpeg;base64,' + data.image_base64;
+
+            throw new Error('لم يتم استلام نتيجة من الذكاء الاصطناعي');
+        }
+
+        // ==================== PRODUCT SELECTION & WHATSAPP ====================
+        function selectProduct(category, productId) {
+            const items = getCategoryProducts(category);
+            const product = items.find(p => p.id === productId);
+            if (!product) return;
+
+            if (category === 'medical') {
+                // Multi-step: select frame then lens
+                selectedMedicalFrame = product;
+                showScreen('screenLensSelection');
+                renderLensSelection();
+                updateAdminUI();
+                showToast('👓 تم اختيار الإطار. الآن اختر العدسة.');
+            } else if (category === 'contacts') {
+                // Direct send to WhatsApp
+                sendToWhatsApp(product, null, null);
+            } else {
+                // sunglasses, protective - direct send
+                sendToWhatsApp(product, null, null);
+            }
+        }
+
+        function renderLensSelection() {
+            const grid = document.getElementById('lensGrid');
+            const empty = document.getElementById('emptyLenses');
+            const lenses = products['lenses'] || [];
+            grid.innerHTML = '';
+
+            if (lenses.length === 0) {
+                empty.classList.remove('hidden');
+                grid.classList.add('hidden');
+            } else {
+                empty.classList.add('hidden');
+                grid.classList.remove('hidden');
+                lenses.forEach(lens => {
+                    const card = document.createElement('div');
+                    card.className = 'lens-card';
+                    card.onclick = () => selectLens(lens);
+                    card.innerHTML = `
+                        <div class="lens-color" style="background:${lens.color || '#ccc'};${lens.image ? 'background-image:url('+lens.image+');background-size:cover;' : ''}"></div>
+                        <h4>${lens.name}</h4>
+                        <p class="lens-price">${lens.price} د.أ</p>
+                        <p style="font-size:11px;color:var(--gray);">${lens.desc || ''}</p>
+                        ${isAdmin ? `<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();deleteLens('${lens.id}')" style="margin-top:4px;">🗑️ حذف</button>` : ''}
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+            document.getElementById('adminAddLensBtnContainer').classList.toggle('hidden', !isAdmin);
+            updateAdminUI();
+        }
+
+        function deleteLens(lensId) {
+            if (confirm('هل أنت متأكد من حذف هذه العدسة؟')) {
+                products['lenses'] = (products['lenses'] || []).filter(l => l.id !== lensId);
+                saveProducts(products);
+                renderLensSelection();
+                showToast('🗑️ تم حذف العدسة');
+            }
+        }
+
+        function selectLens(lens) {
+            selectedLens = lens;
+            // Show prescription upload
+            document.getElementById('selectedFrameName').textContent = selectedMedicalFrame?.name || '-';
+            document.getElementById('selectedLensName').textContent = lens.name;
+            document.getElementById('prescriptionPreview')?.classList.add('hidden');
+            document.getElementById('confirmPrescriptionBtn')?.setAttribute('disabled', '');
+            prescriptionImage = null;
+            showScreen('screenPrescription');
+        }
+
+        function goBackToMedicalFrames() {
+            selectedLens = null;
+            prescriptionImage = null;
+            showCategory('medical');
+        }
+
+        function goBackToLensSelection() {
+            prescriptionImage = null;
+            document.getElementById('prescriptionPreview')?.classList.add('hidden');
+            document.getElementById('confirmPrescriptionBtn')?.setAttribute('disabled', '');
+            if (selectedMedicalFrame) {
+                showScreen('screenLensSelection');
+                renderLensSelection();
+            } else {
+                goBackToMedicalFrames();
+            }
+        }
+
+        function handlePrescriptionUpload(event) {
+            const file = event.target.files[0];
+            if (file) handlePrescriptionFile(file);
+        }
+
+        function handlePrescriptionFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                prescriptionImage = e.target.result;
+                const preview = document.getElementById('prescriptionPreview');
+                if (preview) {
+                    preview.src = prescriptionImage;
+                    preview.classList.remove('hidden');
+                }
+                document.getElementById('confirmPrescriptionBtn')?.removeAttribute('disabled');
+                showToast('📋 تم إرفاق صورة الفحص');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function confirmPrescriptionAndSend() {
+            if (!prescriptionImage) {
+                showToast('⚠️ الرجاء إرفاق صورة الفحص أولاً');
+                return;
+            }
+            if (!selectedMedicalFrame || !selectedLens) {
+                showToast('⚠️ الرجاء اختيار الإطار والعدسة');
+                return;
+            }
+            sendToWhatsApp(selectedMedicalFrame, selectedLens, prescriptionImage);
+        }
+
+        function sendToWhatsApp(product, lens, prescriptionImg) {
+            // Build WhatsApp message
+            let message = '';
+            message += '🛒 *طلب جديد من دار النظارات*%0A%0A';
+
+            if (product) {
+                message += '*المنتج:* ' + encodeURIComponent(product.name) + '%0A';
+                message += '*السعر:* ' + product.price + ' د.أ%0A';
+                if (product.desc) message += '*الوصف:* ' + encodeURIComponent(product.desc) + '%0A';
+                message += '%0A';
+            }
+            if (lens) {
+                message += '*العدسة:* ' + encodeURIComponent(lens.name) + '%0A';
+                message += '*سعر العدسة:* ' + lens.price + ' د.أ%0A';
+                if (lens.desc) message += '*وصف العدسة:* ' + encodeURIComponent(lens.desc) + '%0A';
+                message += '%0A';
+            }
+            if (product && lens) {
+                const total = (product.price || 0) + (lens.price || 0);
+                message += '*المجموع الكلي:* ' + total + ' د.أ%0A%0A';
+            }
+            if (prescriptionImg) {
+                message += '*📋 تم إرفاق صورة الفحص الطبي*%0A';
+            }
+            message += '*الزبون:* ' + encodeURIComponent(currentUser?.name || 'ضيف') + '%0A';
+            message += '---%0A';
+            message += 'شكراً لاختياركم دار النظارات 👓';
+
+            // Open WhatsApp
+            const waUrl = WHATSAPP_URL + '?text=' + message;
+            window.open(waUrl, '_blank');
+
+            // Also try to share images if Web Share API is available
+            if (prescriptionImg && navigator.share && navigator.canShare) {
+                setTimeout(() => {
+                    showToast('📤 يمكنك مشاركة صورة الفحص يدوياً في محادثة الواتساب');
+                }, 1500);
+            }
+
+            showToast('✅ تم فتح الواتساب لإرسال الطلب!');
+
+            // Reset
+            selectedMedicalFrame = null;
+            selectedLens = null;
+            prescriptionImage = null;
+            document.getElementById('prescriptionPreview')?.classList.add('hidden');
+            document.getElementById('confirmPrescriptionBtn')?.setAttribute('disabled', '');
+            document.getElementById('selectedFrameName').textContent = '-';
+            document.getElementById('selectedLensName').textContent = '-';
+
+            setTimeout(() => goHome(), 2000);
+        }
+
+        // ==================== MODAL ====================
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+            document.getElementById('modalContent').innerHTML = '';
+        }
+
+        document.getElementById('modalOverlay')?.addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ==================== TOAST ====================
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                if (toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 3200);
+        }
+
+        // ==================== KEYBOARD SHORTCUT ====================
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ==================== INIT ====================
+        console.log('👓 دار النظارات - Dar Al-Nadarat');
+        console.log('🟠 Premium Eyewear Virtual Try-On Platform');
+        console.log('🔧 Admin:', ADMIN_EMAIL);
+        console.log('📱 WhatsApp:', WHATSAPP_QR_LINK);
+        console.log('🤖 AI API:', API_URL);
+        console.log('✅ All systems ready');
+    </script>
+</body>
+</html>
